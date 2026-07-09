@@ -112,7 +112,7 @@ class PhoneNumberToCarrierMapper
     /**
      * Checks if the supplied number type supports carrier lookup.
      */
-    protected function isMobile(PhoneNumberType $numberType): bool
+    protected function isMobile(int $numberType): bool
     {
         return ($numberType === PhoneNumberType::MOBILE ||
             $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE ||

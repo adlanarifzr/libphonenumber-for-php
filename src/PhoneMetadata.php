@@ -297,7 +297,7 @@ class PhoneMetadata
         return $this->mobileNumberPortableRegion;
     }
 
-    public function setInternationalPrefix(string $value): static
+    public function setInternationalPrefix(string $value)
     {
         $this->internationalPrefix = $value;
         return $this;

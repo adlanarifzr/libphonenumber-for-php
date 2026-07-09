@@ -207,6 +207,13 @@ class PhoneNumberMatcher implements Iterator
      * The region (country) to assume for phone numbers without an international prefix, possibly
      * null.
      */
+    protected PhoneNumberUtil $phoneUtil;
+    protected string $text;
+
+    /**
+     * The region (country) to assume for phone numbers without an international prefix, possibly
+     * null.
+     */
     protected ?string $preferredRegion;
 
     /**
@@ -250,15 +257,17 @@ class PhoneNumberMatcher implements Iterator
      * @internal @see PhoneNumberUtil::findNumbers() instead
      */
     public function __construct(
-        protected readonly PhoneNumberUtil $phoneUtil,
-        protected readonly string $text,
+        PhoneNumberUtil $phoneUtil,
+        string $text,
         ?string $country,
         AbstractLeniency $leniency,
-        int $maxTries,
+        int $maxTries
     ) {
         if ($maxTries < 0) {
             throw new InvalidArgumentException();
         }
+        $this->phoneUtil = $phoneUtil;
+        $this->text = $text;
         $this->preferredRegion = $country;
         $this->leniency = $leniency;
         $this->maxTries = $maxTries;
