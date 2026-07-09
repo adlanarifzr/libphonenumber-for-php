@@ -40,10 +40,10 @@ class ShortNumberInfo
 
     protected function __construct(
         MatcherAPIInterface $matcherAPI,
-        MetadataSourceInterface $metadataSource = new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\ShortNumberMetadata_')
+        ?MetadataSourceInterface $metadataSource = null
     ) {
         $this->matcherAPI = $matcherAPI;
-        $this->metadataSource = $metadataSource;
+        $this->metadataSource = $metadataSource ?? new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\ShortNumberMetadata_');
 
         // TODO: Create ShortNumberInfo for a given map
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP;
