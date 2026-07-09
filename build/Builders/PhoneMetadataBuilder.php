@@ -25,13 +25,13 @@ class PhoneMetadataBuilder extends PhoneMetadata
      */
     private array $constants = [];
 
-    public function setId(string $value): static
+    public function setId(string $value): self
     {
         $this->constants['ID'] = $value;
         return $this;
     }
 
-    public function setCountryCode(int $value): static
+    public function setCountryCode(int $value): self
     {
         $this->constants['COUNTRY_CODE'] = $value;
         return $this;
@@ -53,7 +53,7 @@ class PhoneMetadataBuilder extends PhoneMetadata
         return $this->constants['ID'] ?? null;
     }
 
-    public function setLeadingDigits(string $value): static
+    public function setLeadingDigits(string $value): self
     {
         $this->constants['LEADING_DIGITS'] = $value;
         return $this;
@@ -67,25 +67,25 @@ class PhoneMetadataBuilder extends PhoneMetadata
         return $this->constants['LEADING_DIGITS'] ?? null;
     }
 
-    public function setPreferredInternationalPrefix(string $value): static
+    public function setPreferredInternationalPrefix(string $value): self
     {
         $this->preferredInternationalPrefix = $value;
         return $this;
     }
 
-    public function setNationalPrefixForParsing(string $value): static
+    public function setNationalPrefixForParsing(string $value): self
     {
         $this->nationalPrefixForParsing = $value;
         return $this;
     }
 
-    public function setNationalPrefixTransformRule(string $value): static
+    public function setNationalPrefixTransformRule(string $value): self
     {
         $this->nationalPrefixTransformRule = $value;
         return $this;
     }
 
-    public function setNationalPrefix(string $value): static
+    public function setNationalPrefix(string $value): self
     {
         $this->constants['NATIONAL_PREFIX'] = $value;
         return $this;
@@ -99,146 +99,146 @@ class PhoneMetadataBuilder extends PhoneMetadata
         return $this->constants['NATIONAL_PREFIX'] ?? null;
     }
 
-    public function setPreferredExtnPrefix(string $value): static
+    public function setPreferredExtnPrefix(string $value): self
     {
         $this->preferredExtnPrefix = $value;
         return $this;
     }
 
-    public function setMainCountryForCode(bool $value): static
+    public function setMainCountryForCode(bool $value): self
     {
         $this->mainCountryForCode = $value;
         return $this;
     }
 
-    public function setMobileNumberPortableRegion(bool $value): static
+    public function setMobileNumberPortableRegion(bool $value): self
     {
         $this->mobileNumberPortableRegion = $value;
         return $this;
     }
 
-    public function addNumberFormat(NumberFormat $value): static
+    public function addNumberFormat(NumberFormat $value): self
     {
         $this->numberFormat[] = $value;
         return $this;
     }
 
-    public function addIntlNumberFormat(NumberFormat $value): static
+    public function addIntlNumberFormat(NumberFormat $value): self
     {
         $this->intlNumberFormat[] = $value;
         return $this;
     }
 
-    public function clearIntlNumberFormat(): static
+    public function clearIntlNumberFormat(): self
     {
         $this->intlNumberFormat = [];
         return $this;
     }
 
     // Add missing setters from PhoneMetadata
-    public function setGeneralDesc(PhoneNumberDesc $value): static
+    public function setGeneralDesc(PhoneNumberDesc $value): self
     {
         $this->generalDesc = $value;
         return $this;
     }
 
-    public function setFixedLine(PhoneNumberDesc $value): static
+    public function setFixedLine(PhoneNumberDesc $value): self
     {
         $this->fixedLine = $value;
         return $this;
     }
 
-    public function setMobile(PhoneNumberDesc $value): static
+    public function setMobile(PhoneNumberDesc $value): self
     {
         $this->mobile = $value;
         return $this;
     }
 
-    public function setTollFree(PhoneNumberDesc $value): static
+    public function setTollFree(PhoneNumberDesc $value): self
     {
         $this->tollFree = $value;
         return $this;
     }
 
-    public function setPremiumRate(PhoneNumberDesc $value): static
+    public function setPremiumRate(PhoneNumberDesc $value): self
     {
         $this->premiumRate = $value;
         return $this;
     }
 
-    public function setSharedCost(PhoneNumberDesc $value): static
+    public function setSharedCost(PhoneNumberDesc $value): self
     {
         $this->sharedCost = $value;
         return $this;
     }
 
-    public function setPersonalNumber(PhoneNumberDesc $value): static
+    public function setPersonalNumber(PhoneNumberDesc $value): self
     {
         $this->personalNumber = $value;
         return $this;
     }
 
-    public function setVoip(PhoneNumberDesc $value): static
+    public function setVoip(PhoneNumberDesc $value): self
     {
         $this->voip = $value;
         return $this;
     }
 
-    public function setPager(PhoneNumberDesc $value): static
+    public function setPager(PhoneNumberDesc $value): self
     {
         $this->pager = $value;
         return $this;
     }
 
-    public function setUan(PhoneNumberDesc $value): static
+    public function setUan(PhoneNumberDesc $value): self
     {
         $this->uan = $value;
         return $this;
     }
 
-    public function setEmergency(PhoneNumberDesc $value): static
+    public function setEmergency(PhoneNumberDesc $value): self
     {
         $this->emergency = $value;
         return $this;
     }
 
-    public function setVoicemail(PhoneNumberDesc $value): static
+    public function setVoicemail(PhoneNumberDesc $value): self
     {
         $this->voicemail = $value;
         return $this;
     }
 
-    public function setShortCode(PhoneNumberDesc $value): static
+    public function setShortCode(PhoneNumberDesc $value): self
     {
         $this->short_code = $value;
         return $this;
     }
 
-    public function setStandardRate(PhoneNumberDesc $value): static
+    public function setStandardRate(PhoneNumberDesc $value): self
     {
         $this->standard_rate = $value;
         return $this;
     }
 
-    public function setCarrierSpecific(PhoneNumberDesc $value): static
+    public function setCarrierSpecific(PhoneNumberDesc $value): self
     {
         $this->carrierSpecific = $value;
         return $this;
     }
 
-    public function setSmsServices(PhoneNumberDesc $value): static
+    public function setSmsServices(PhoneNumberDesc $value): self
     {
         $this->smsServices = $value;
         return $this;
     }
 
-    public function setNoInternationalDialling(PhoneNumberDesc $value): static
+    public function setNoInternationalDialling(PhoneNumberDesc $value): self
     {
         $this->noInternationalDialling = $value;
         return $this;
     }
 
-    public function setSameMobileAndFixedLinePattern(bool $value): static
+    public function setSameMobileAndFixedLinePattern(bool $value): self
     {
         $this->sameMobileAndFixedLinePattern = $value;
         return $this;
@@ -267,8 +267,8 @@ class PhoneMetadataBuilder extends PhoneMetadata
         $constructor = $class->addMethod('__construct');
 
         foreach ($reflection->getConstants() as $name => $value) {
-            $parentConstant = $parentReflection->getConstant($name);
-            $parentValue = $parentConstant?->getValue();
+            $parentConstant = $parentReflection->getReflectionConstant($name);
+            $parentValue = $parentConstant !== false ? $parentConstant->getValue() : null;
 
             if ($parentValue !== $value) {
                 $constant = $class->addConstant($name, $value);
@@ -277,8 +277,8 @@ class PhoneMetadataBuilder extends PhoneMetadata
         }
 
         foreach ($this->constants as $name => $value) {
-            $parentConstant = $parentReflection->getConstant($name);
-            $parentValue = $parentConstant?->getValue();
+            $parentConstant = $parentReflection->getReflectionConstant($name);
+            $parentValue = $parentConstant !== false ? $parentConstant->getValue() : null;
 
             if ($class->hasConstant($name)) {
                 $class->getConstant($name)->setValue($value);

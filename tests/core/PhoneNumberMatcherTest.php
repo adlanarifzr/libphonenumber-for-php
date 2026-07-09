@@ -12,7 +12,6 @@ use libphonenumber\PhoneNumberMatch;
 use libphonenumber\PhoneNumberMatcher;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_fill;
@@ -329,7 +328,9 @@ class PhoneNumberMatcherTest extends TestCase
         ];
     }
 
-    #[DataProvider('dataLatinLetters')]
+    /**
+     * @dataProvider dataLatinLetters
+     */
     public function testIsLatinLetter(string $letter, bool $expectedResult): void
     {
         self::assertEquals(
@@ -616,13 +617,17 @@ class PhoneNumberMatcherTest extends TestCase
         + self::dataPossibleOnlyCases();
     }
 
-    #[DataProvider('data_testMatchesWithPossibleLeniency')]
+    /**
+     * @dataProvider data_testMatchesWithPossibleLeniency
+     */
     public function testMatchesWithPossibleLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::POSSIBLE());
     }
 
-    #[DataProvider('dataImpossibleCases')]
+    /**
+     * @dataProvider dataImpossibleCases
+     */
     public function testNonMatchesWithPossibleLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::POSSIBLE());
@@ -638,7 +643,9 @@ class PhoneNumberMatcherTest extends TestCase
         + self::dataValidCases();
     }
 
-    #[DataProvider('data_testMatchesWithValidLeniency')]
+    /**
+     * @dataProvider data_testMatchesWithValidLeniency
+     */
     public function testMatchesWithValidLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::VALID());
@@ -653,7 +660,9 @@ class PhoneNumberMatcherTest extends TestCase
             + self::dataPossibleOnlyCases();
     }
 
-    #[DataProvider('data_testNonMatchesWithValidLeniency')]
+    /**
+     * @dataProvider data_testNonMatchesWithValidLeniency
+     */
     public function testNonMatchesWithValidLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::VALID());
@@ -668,7 +677,9 @@ class PhoneNumberMatcherTest extends TestCase
             + self::dataExactGroupingCases();
     }
 
-    #[DataProvider('data_testMatchesWithStrictGroupingLeniency')]
+    /**
+     * @dataProvider data_testMatchesWithStrictGroupingLeniency
+     */
     public function testMatchesWithStrictGroupingLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::STRICT_GROUPING());
@@ -684,13 +695,17 @@ class PhoneNumberMatcherTest extends TestCase
             + self::dataValidCases();
     }
 
-    #[DataProvider('data_testNonMatchesWithStrictGroupLeniency')]
+    /**
+     * @dataProvider data_testNonMatchesWithStrictGroupLeniency
+     */
     public function testNonMatchesWithStrictGroupLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::STRICT_GROUPING());
     }
 
-    #[DataProvider('dataExactGroupingCases')]
+    /**
+     * @dataProvider dataExactGroupingCases
+     */
     public function testMatchesWithExactGroupingLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::EXACT_GROUPING());
@@ -707,7 +722,9 @@ class PhoneNumberMatcherTest extends TestCase
             + self::dataStrictGroupingCases();
     }
 
-    #[DataProvider('data_testNonMatchesExactGroupLeniency')]
+    /**
+     * @dataProvider data_testNonMatchesExactGroupLeniency
+     */
     public function testNonMatchesExactGroupLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::EXACT_GROUPING());

@@ -433,7 +433,7 @@ class GeneratePhonePrefixData
      * @param array<string,array<int|string>> $availableDataFiles
      * @param int|string $prefix Build uses int, tests use string.
      */
-    public function addConfigurationMapping(array &$availableDataFiles, string $language, int|string $prefix): void
+    public function addConfigurationMapping(array &$availableDataFiles, string $language, $prefix): void
     {
         if (!array_key_exists($language, $availableDataFiles)) {
             $availableDataFiles[$language] = [];

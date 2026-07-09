@@ -24,8 +24,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testConvertAlphaCharactersInNumber()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testConvertAlphaCharactersInNumber(): void
     {
         $input = '1800-ABC-DEF';
@@ -36,8 +36,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testGetCountryMobileToken()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testGetCountryMobileToken(): void
     {
         // AR
@@ -49,8 +49,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testIsViablePhoneNumber()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testIsViablePhoneNumber(): void
     {
         self::assertFalse(PhoneNumberUtil::isViablePhoneNumber('1'));
@@ -58,8 +58,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testExtractPossibleNumber()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testExtractPossibleNumber(): void
     {
         self::assertSame('0800-345-600', PhoneNumberUtil::extractPossibleNumber('Tel:0800-345-600'));
@@ -67,8 +67,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testNormaliseOtherDigits()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testNormaliseReplaceAlphaCharacters(): void
     {
         $inputNumber = '034-I-am-HUNGRY';
@@ -82,8 +82,8 @@ class Issue135Test extends TestCase
 
     /**
      * @see PhoneNumberUtilTest::testNormaliseStripNonDiallableCharacters()
+     * @runInSeparateProcess
      */
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testNormalizeDiallableCharsOnly(): void
     {
         $inputNumber = '03*4-56&+a#234';

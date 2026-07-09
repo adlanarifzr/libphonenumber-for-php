@@ -10,7 +10,6 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -73,14 +72,18 @@ class ExampleNumbersTest extends TestCase
         ];
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testFixedLine(string $region): void
     {
         $fixedLineTypes = [PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::FIXED_LINE, $fixedLineTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testFixedLineOrMobile(string $region): void
     {
         $numberTypes = [PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
@@ -105,74 +108,95 @@ class ExampleNumbersTest extends TestCase
         }
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testMobile(string $region): void
     {
         $mobileTypes = [PhoneNumberType::MOBILE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::MOBILE, $mobileTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testTollFree(string $region): void
     {
         $tollFreeTypes = [PhoneNumberType::TOLL_FREE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::TOLL_FREE, $tollFreeTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testPremiumRate(string $region): void
     {
         $premiumRateTypes = [PhoneNumberType::PREMIUM_RATE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PREMIUM_RATE, $premiumRateTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testVoip(string $region): void
     {
         $voipTypes = [PhoneNumberType::VOIP];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::VOIP, $voipTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testPager(string $region): void
     {
         $pagerTypes = [PhoneNumberType::PAGER];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PAGER, $pagerTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testUan(string $region): void
     {
         $uanTypes = [PhoneNumberType::UAN];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::UAN, $uanTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testVoicemail(string $region): void
     {
         $voicemailTypes = [PhoneNumberType::VOICEMAIL];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::VOICEMAIL, $voicemailTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testPersonalNumber(string $region): void
     {
         $numberTypes = [PhoneNumberType::PERSONAL_NUMBER];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PERSONAL_NUMBER, $numberTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testSharedCost(string $region): void
     {
         $sharedCostTypes = [PhoneNumberType::SHARED_COST];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::SHARED_COST, $sharedCostTypes, $region);
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testCanBeInternationallyDialled(string $regionCode): void
     {
         $exampleNumber = null;
-        $desc = $this->phoneNumberUtil->getMetadataForRegion($regionCode)?->getNoInternationalDialling();
+        $metadata = $this->phoneNumberUtil->getMetadataForRegion($regionCode);
+        $desc = $metadata !== null ? $metadata->getNoInternationalDialling() : null;
         self::assertNotNull($desc);
         try {
             if ($desc->hasExampleNumber()) {
@@ -219,7 +243,9 @@ class ExampleNumbersTest extends TestCase
         return $returnList;
     }
 
-    #[DataProvider('supportedGlobalNetworkCallingCodes')]
+    /**
+     * @dataProvider supportedGlobalNetworkCallingCodes
+     */
     public function testGlobalNetworkNumbers(int $callingCode): void
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForNonGeoEntity($callingCode);
@@ -229,7 +255,9 @@ class ExampleNumbersTest extends TestCase
         }
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testEveryRegionHasAnExampleNumber(string $regionCode): void
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumber($regionCode);
@@ -249,21 +277,27 @@ class ExampleNumbersTest extends TestCase
         self::assertTrue($this->phoneNumberUtil->isValidNumberForRegion($phoneObject, $regionCode));
     }
 
-    #[DataProvider('regionList')]
+    /**
+     * @dataProvider regionList
+     */
     public function testEveryRegionHasAnInvalidExampleNumber(string $regionCode): void
     {
         $exampleNumber = $this->phoneNumberUtil->getInvalidExampleNumber($regionCode);
         self::assertNotNull($exampleNumber, 'No invalid example number found for region ' . $regionCode);
     }
 
-    #[DataProvider('numberTypes')]
+    /**
+     * @dataProvider numberTypes
+     */
     public function testEveryTypeHasAnExampleNumber(PhoneNumberType $numberType): void
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForType($numberType);
         self::assertNotNull($exampleNumber, 'No example number found for type ' . $numberType->name);
     }
 
-    #[DataProvider('shortNumberRegionList')]
+    /**
+     * @dataProvider shortNumberRegionList
+     */
     public function testShortNumbersValidAndCorrectCost(string $regionCode): void
     {
         $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumber($regionCode);
@@ -305,7 +339,9 @@ class ExampleNumbersTest extends TestCase
         return $output;
     }
 
-    #[DataProvider('shortRegionListAndNumberCost')]
+    /**
+     * @dataProvider shortRegionListAndNumberCost
+     */
     public function testShortNumberHasCorrectCost(string $regionCode, ShortNumberCost $cost): void
     {
         $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumberForCost($regionCode, $cost);
@@ -317,10 +353,13 @@ class ExampleNumbersTest extends TestCase
         }
     }
 
-    #[DataProvider('shortNumberRegionList')]
+    /**
+     * @dataProvider shortNumberRegionList
+     */
     public function testEmergency(string $regionCode): void
     {
-        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)?->getEmergency();
+        $metadata = $this->shortNumberInfo->getMetadataForRegion($regionCode);
+        $desc = $metadata !== null ? $metadata->getEmergency() : null;
         self::assertNotNull($desc);
 
         if ($desc->hasExampleNumber()) {
@@ -343,11 +382,14 @@ class ExampleNumbersTest extends TestCase
         }
     }
 
-    #[DataProvider('shortNumberRegionList')]
+    /**
+     * @dataProvider shortNumberRegionList
+     */
     public function testCarrierSpecificShortNumbers(string $regionCode): void
     {
         // Test the carrier-specific tag.
-        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)?->getCarrierSpecific();
+        $metadata = $this->shortNumberInfo->getMetadataForRegion($regionCode);
+        $desc = $metadata !== null ? $metadata->getCarrierSpecific() : null;
         self::assertNotNull($desc);
 
         if ($desc->hasExampleNumber()) {
@@ -362,10 +404,13 @@ class ExampleNumbersTest extends TestCase
         }
     }
 
-    #[DataProvider('shortNumberRegionList')]
+    /**
+     * @dataProvider shortNumberRegionList
+     */
     public function testSmsServiceShortNumbers(string $regionCode): void
     {
-        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)?->getSmsServices();
+        $metadata = $this->shortNumberInfo->getMetadataForRegion($regionCode);
+        $desc = $metadata !== null ? $metadata->getSmsServices() : null;
         self::assertNotNull($desc);
 
         if ($desc->hasExampleNumber()) {
