@@ -431,7 +431,7 @@ class PhoneNumberUtil
      */
     public static function getInstance(
         string $metadataLocation = __NAMESPACE__ . '\data\PhoneNumberMetadata_',
-        array $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP,
+        array $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP
     ): PhoneNumberUtil {
         if (!isset(static::$instance)) {
             $metadataSource = new MultiFileMetadataSourceImpl($metadataLocation);
@@ -1300,7 +1300,7 @@ class PhoneNumberUtil
         string $nationalNumber,
         NumberFormat $formattingPattern,
         int $numberFormat,
-        ?string $carrierCode = null,
+        ?string $carrierCode = null
     ): string {
         $numberFormatRule = $formattingPattern->getFormat();
         $m = new Matcher($formattingPattern->getPattern(), $nationalNumber);

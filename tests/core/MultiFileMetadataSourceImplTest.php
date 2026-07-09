@@ -16,7 +16,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
     public function setUp(): void
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
-            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_',
+            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_'
         );
     }
 
