@@ -120,7 +120,7 @@ class Matcher
         return $this->groups[$group][1] + mb_strlen($this->groups[$group][0]);
     }
 
-    public function start(?int $group = null): mixed
+    public function start(?int $group = null)
     {
         if ($group === null) {
             $group = 0;
@@ -142,7 +142,7 @@ class Matcher
         return preg_replace('/' . $this->pattern . '/x', $replacement, $this->subject);
     }
 
-    public function reset(string $input = ''): static
+    public function reset(string $input = '')
     {
         $this->subject = $input;
 

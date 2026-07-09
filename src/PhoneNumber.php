@@ -61,7 +61,7 @@ class PhoneNumber implements Serializable
      * The source from which the country_code is derived. This is not set in the general parsing method,
      * but in the method that parses and keeps raw_input. New fields could be added upon request.
      */
-    protected ?CountryCodeSource $countryCodeSource = CountryCodeSource::UNSPECIFIED;
+    protected ?int $countryCodeSource = CountryCodeSource::UNSPECIFIED;
     /**
      * The carrier selection code that is preferred when calling this phone number domestically. This
      * also includes codes that need to be dialed in some countries when calling from landlines to
@@ -80,7 +80,7 @@ class PhoneNumber implements Serializable
      */
     protected int $numberOfLeadingZeros = 1;
 
-    public function clear(): static
+    public function clear()
     {
         $this->clearCountryCode();
         $this->clearNationalNumber();
@@ -93,50 +93,50 @@ class PhoneNumber implements Serializable
         return $this;
     }
 
-    public function clearCountryCode(): static
+    public function clearCountryCode()
     {
         $this->countryCode = null;
         return $this;
     }
 
-    public function clearNationalNumber(): static
+    public function clearNationalNumber()
     {
         $this->nationalNumber = null;
         return $this;
     }
 
-    public function clearExtension(): static
+    public function clearExtension()
     {
         $this->extension = null;
         return $this;
     }
 
-    public function clearItalianLeadingZero(): static
+    public function clearItalianLeadingZero()
     {
         $this->italianLeadingZero = null;
         return $this;
     }
 
-    public function clearNumberOfLeadingZeros(): static
+    public function clearNumberOfLeadingZeros()
     {
         $this->hasNumberOfLeadingZeros = false;
         $this->numberOfLeadingZeros = 1;
         return $this;
     }
 
-    public function clearRawInput(): static
+    public function clearRawInput()
     {
         $this->rawInput = null;
         return $this;
     }
 
-    public function clearCountryCodeSource(): static
+    public function clearCountryCodeSource()
     {
         $this->countryCodeSource = CountryCodeSource::UNSPECIFIED;
         return $this;
     }
 
-    public function clearPreferredDomesticCarrierCode(): static
+    public function clearPreferredDomesticCarrierCode()
     {
         $this->preferredDomesticCarrierCode = null;
         return $this;
@@ -145,7 +145,7 @@ class PhoneNumber implements Serializable
     /**
      * Merges the information from another phone number into this phone number.
      */
-    public function mergeFrom(PhoneNumber $other): static
+    public function mergeFrom(PhoneNumber $other)
     {
         if ($other->hasCountryCode()) {
             $this->setCountryCode($other->getCountryCode());
@@ -184,7 +184,7 @@ class PhoneNumber implements Serializable
         return $this->countryCode;
     }
 
-    public function setCountryCode(int $value): static
+    public function setCountryCode(int $value)
     {
         $this->countryCode = $value;
         return $this;
@@ -200,7 +200,7 @@ class PhoneNumber implements Serializable
         return $this->nationalNumber;
     }
 
-    public function setNationalNumber(string $value): static
+    public function setNationalNumber(string $value)
     {
         $this->nationalNumber = $value;
         return $this;
@@ -216,7 +216,7 @@ class PhoneNumber implements Serializable
         return $this->extension;
     }
 
-    public function setExtension(string $value): static
+    public function setExtension(string $value)
     {
         $this->extension = $value;
         return $this;
@@ -227,7 +227,7 @@ class PhoneNumber implements Serializable
         return isset($this->italianLeadingZero);
     }
 
-    public function setItalianLeadingZero(bool $value): static
+    public function setItalianLeadingZero(bool $value)
     {
         $this->italianLeadingZero = $value;
         return $this;
@@ -253,7 +253,7 @@ class PhoneNumber implements Serializable
         return $this->numberOfLeadingZeros;
     }
 
-    public function setNumberOfLeadingZeros(int $value): static
+    public function setNumberOfLeadingZeros(int $value)
     {
         $this->hasNumberOfLeadingZeros = true;
         $this->numberOfLeadingZeros = $value;
@@ -270,7 +270,7 @@ class PhoneNumber implements Serializable
         return $this->rawInput;
     }
 
-    public function setRawInput(string $value): static
+    public function setRawInput(string $value)
     {
         $this->rawInput = $value;
         return $this;
@@ -281,12 +281,12 @@ class PhoneNumber implements Serializable
         return $this->countryCodeSource !== CountryCodeSource::UNSPECIFIED;
     }
 
-    public function getCountryCodeSource(): ?CountryCodeSource
+    public function getCountryCodeSource(): ?int
     {
         return $this->countryCodeSource;
     }
 
-    public function setCountryCodeSource(CountryCodeSource $value): static
+    public function setCountryCodeSource(int $value)
     {
         $this->countryCodeSource = $value;
         return $this;
@@ -302,7 +302,7 @@ class PhoneNumber implements Serializable
         return $this->preferredDomesticCarrierCode;
     }
 
-    public function setPreferredDomesticCarrierCode(string $value): static
+    public function setPreferredDomesticCarrierCode(string $value)
     {
         $this->preferredDomesticCarrierCode = $value;
         return $this;

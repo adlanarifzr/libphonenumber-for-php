@@ -30,13 +30,15 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
      * @var PhoneMetadata[]
      */
     protected array $countryCodeToNonGeographicalMetadataMap = [];
+    protected string $currentFilePrefix;
 
     /**
      * @param string $currentFilePrefix The prefix of the metadata class names from which region data is loaded
      */
-    public function __construct(
-        protected readonly string $currentFilePrefix = __NAMESPACE__ . '\data\PhoneNumberMetadata_'
-    ) {}
+    public function __construct(string $currentFilePrefix = __NAMESPACE__ . '\data\PhoneNumberMetadata_')
+    {
+        $this->currentFilePrefix = $currentFilePrefix;
+    }
 
     public function getMetadataForRegion(string $regionCode): PhoneMetadata
     {

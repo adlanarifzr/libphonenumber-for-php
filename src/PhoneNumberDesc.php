@@ -34,7 +34,7 @@ class PhoneNumberDesc
     /**
      * @param int[] $possibleLength
      */
-    public function setPossibleLength(array $possibleLength): static
+    public function setPossibleLength(array $possibleLength)
     {
         $this->possibleLength = $possibleLength;
         return $this;
@@ -63,7 +63,7 @@ class PhoneNumberDesc
     /**
      * @param int[] $possibleLengthLocalOnly
      */
-    public function setPossibleLengthLocalOnly(array $possibleLengthLocalOnly): static
+    public function setPossibleLengthLocalOnly(array $possibleLengthLocalOnly)
     {
         $this->possibleLengthLocalOnly = $possibleLengthLocalOnly;
 
@@ -95,7 +95,7 @@ class PhoneNumberDesc
         return $this->nationalNumberPattern;
     }
 
-    public function setNationalNumberPattern(string $value): static
+    public function setNationalNumberPattern(string $value)
     {
         $this->hasNationalNumberPattern = true;
         $this->nationalNumberPattern = $value;
@@ -113,7 +113,7 @@ class PhoneNumberDesc
         return $this->exampleNumber;
     }
 
-    public function setExampleNumber(string $value): static
+    public function setExampleNumber(string $value)
     {
         $this->hasExampleNumber = true;
         $this->exampleNumber = $value;

@@ -23,6 +23,8 @@ use RuntimeException;
 class ShortNumberInfo
 {
     protected static ?ShortNumberInfo $instance;
+    protected MatcherAPIInterface $matcherAPI;
+    protected MetadataSourceInterface $metadataSource;
     /**
      * @var array<int,string[]>
      */
@@ -37,9 +39,12 @@ class ShortNumberInfo
     ];
 
     protected function __construct(
-        protected MatcherAPIInterface $matcherAPI,
-        protected MetadataSourceInterface $metadataSource = new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\ShortNumberMetadata_'),
+        MatcherAPIInterface $matcherAPI,
+        MetadataSourceInterface $metadataSource = new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\ShortNumberMetadata_')
     ) {
+        $this->matcherAPI = $matcherAPI;
+        $this->metadataSource = $metadataSource;
+
         // TODO: Create ShortNumberInfo for a given map
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP;
 
@@ -144,7 +149,7 @@ class ShortNumberInfo
      * @return string a valid short number for the specified region and cost category. Returns an empty string
      *                when the metadata does not contain such information, or the cost is UNKNOWN_COST.
      */
-    public function getExampleShortNumberForCost(string $regionCode, ShortNumberCost $cost): string
+    public function getExampleShortNumberForCost(string $regionCode, int $cost): string
     {
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
         if ($phoneMetadata === null) {
@@ -460,7 +465,7 @@ class ShortNumberInfo
      *                         the number does not match a cost category. Note that an invalid number may match any cost
      *                         category.
      */
-    public function getExpectedCostForRegion(PhoneNumber $number, string $regionDialingFrom): ShortNumberCost
+    public function getExpectedCostForRegion(PhoneNumber $number, string $regionDialingFrom): int
     {
         if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
             return ShortNumberCost::UNKNOWN_COST;
@@ -525,7 +530,7 @@ class ShortNumberInfo
      * @return ShortNumberCost the highest expected cost category of the short number in the region(s) with the given
      *                         country calling code
      */
-    public function getExpectedCost(PhoneNumber $number): ShortNumberCost
+    public function getExpectedCost(PhoneNumber $number): int
     {
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
 
