@@ -6,7 +6,6 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PHP7Test extends TestCase
@@ -19,7 +18,9 @@ class PHP7Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    #[DataProvider('validPolishNumbers')]
+    /**
+     * @dataProvider validPolishNumbers
+     */
     public function testValidPolishNumbers(string $number): void
     {
         $phoneNumber = $this->phoneUtil->parse($number, 'PL');

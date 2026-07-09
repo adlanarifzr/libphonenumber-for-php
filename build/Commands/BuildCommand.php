@@ -7,7 +7,6 @@ namespace libphonenumber\buildtools\Commands;
 use libphonenumber\buildtools\BuildMetadataPHPFromXml;
 use libphonenumber\buildtools\GeneratePhonePrefixData;
 use libphonenumber\buildtools\GenerateTimeZonesMapData;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,12 +14,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-#[AsCommand(
-    name: 'build',
-    description: 'Build all metadata data',
-)]
 class BuildCommand extends Command
 {
+    protected static $defaultName = 'build';
+    protected static $defaultDescription = 'Build all metadata data';
+
     private const GIT_REPO = 'https://github.com/google/libphonenumber.git';
     private const GIT_PATH = __DIR__ . '/../../libphonenumber-data-dir/';
 

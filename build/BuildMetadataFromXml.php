@@ -104,7 +104,11 @@ class BuildMetadataFromXml
     /**
      * @return PhoneMetadataBuilder[]
      */
-    public static function buildPhoneMetadataCollection(string|DOMElement $inputXmlFile, bool $isShortNumberMetadata = false, bool $isAlternateFormatsMetadata = false): array
+    /**
+     * @param string|DOMElement $inputXmlFile
+     * @return PhoneMetadataBuilder[]
+     */
+    public static function buildPhoneMetadataCollection($inputXmlFile, bool $isShortNumberMetadata = false, bool $isAlternateFormatsMetadata = false): array
     {
         if ($inputXmlFile instanceof DOMElement) {
             $document = $inputXmlFile;

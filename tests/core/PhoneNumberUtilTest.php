@@ -234,7 +234,8 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals('$1 $2 $3', $metadata->getNumberFormat(1)->getFormat());
         self::assertNotNull($metadata->getGeneralDesc());
         self::assertEquals('[13-689]\\d{9}|2[0-35-9]\\d{8}', $metadata->getGeneralDesc()->getNationalNumberPattern());
-        self::assertEquals('[13-689]\\d{9}|2[0-35-9]\\d{8}', $metadata->getFixedLine()?->getNationalNumberPattern());
+        self::assertNotNull($metadata->getFixedLine());
+        self::assertEquals('[13-689]\\d{9}|2[0-35-9]\\d{8}', $metadata->getFixedLine()->getNationalNumberPattern());
         self::assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
         self::assertEquals(10, $possibleLength[0]);
@@ -242,7 +243,8 @@ class PhoneNumberUtilTest extends TestCase
         // toll free element as well.
         self::assertNotNull($metadata->getTollFree());
         self::assertCount(0, $metadata->getTollFree()->getPossibleLength());
-        self::assertEquals('900\\d{7}', $metadata->getPremiumRate()?->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPremiumRate());
+        self::assertEquals('900\\d{7}', $metadata->getPremiumRate()->getNationalNumberPattern());
         // No shared-cost data is available, so its national number data should not be set.
         self::assertNotNull($metadata->getSharedCost());
         self::assertFalse($metadata->getSharedCost()->hasNationalNumberPattern());
@@ -278,7 +280,8 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals('30123456', $metadata->getFixedLine()->getExampleNumber());
         self::assertNotNull($metadata->getTollFree());
         self::assertContains(10, $metadata->getTollFree()->getPossibleLength());
-        self::assertEquals('900([135]\\d{6}|9\\d{7})', $metadata->getPremiumRate()?->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPremiumRate());
+        self::assertEquals('900([135]\\d{6}|9\\d{7})', $metadata->getPremiumRate()->getNationalNumberPattern());
     }
 
     public function testGetInstanceLoadARMetadata(): void
@@ -308,7 +311,8 @@ class PhoneNumberUtilTest extends TestCase
         self::assertNotNull($metadata->getGeneralDesc());
         self::assertCount(0, $metadata->getGeneralDesc()->getPossibleLengthLocalOnly());
         self::assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
-        self::assertEquals('12345678', $metadata->getTollFree()?->getExampleNumber());
+        self::assertNotNull($metadata->getTollFree());
+        self::assertEquals('12345678', $metadata->getTollFree()->getExampleNumber());
     }
 
     public function testIsNumberGeographical(): void
@@ -3825,7 +3829,9 @@ class PhoneNumberUtilTest extends TestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('dataForInvalidPhoneContext')]
+    /**
+     * @dataProvider dataForInvalidPhoneContext
+     */
     public function testThrowForInvalidPhoneContext(string $numberToParse): void
     {
         try {

@@ -14,7 +14,6 @@ use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function in_array;
@@ -33,7 +32,9 @@ class LocaleTest extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    #[DataProvider('localeList')]
+    /**
+     * @dataProvider localeList
+     */
     public function testLocales(string $regionCode, string $countryName): void
     {
         if (!in_array($regionCode, $this->phoneUtil->getSupportedRegions(), true)) {

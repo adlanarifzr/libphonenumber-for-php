@@ -20,7 +20,9 @@ class Issue175Test extends TestCase
         PhoneNumberUtil::resetInstance();
     }
 
-    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
+    /**
+     * @runInSeparateProcess
+     */
     public function testIsViablePhoneNumber(): void
     {
         $ret = PhoneNumberUtil::isViablePhoneNumber('01111');

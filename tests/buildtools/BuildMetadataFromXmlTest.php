@@ -555,15 +555,24 @@ class BuildMetadataFromXmlTest extends TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadataBuilder();
         BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* isShortNumberMetadata */);
-        self::assertSame('\\d{1}', $metadata->getFixedLine()?->getNationalNumberPattern());
-        self::assertSame('\\d{2}', $metadata->getMobile()?->getNationalNumberPattern());
-        self::assertSame('\\d{3}', $metadata->getPager()?->getNationalNumberPattern());
-        self::assertSame('\\d{4}', $metadata->getTollFree()?->getNationalNumberPattern());
-        self::assertSame('\\d{5}', $metadata->getPremiumRate()?->getNationalNumberPattern());
-        self::assertSame('\\d{6}', $metadata->getSharedCost()?->getNationalNumberPattern());
-        self::assertSame('\\d{7}', $metadata->getPersonalNumber()?->getNationalNumberPattern());
-        self::assertSame('\\d{8}', $metadata->getVoip()?->getNationalNumberPattern());
-        self::assertSame('\\d{9}', $metadata->getUan()?->getNationalNumberPattern());
+        self::assertNotNull($metadata->getFixedLine());
+        self::assertSame('\\d{1}', $metadata->getFixedLine()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getMobile());
+        self::assertSame('\\d{2}', $metadata->getMobile()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPager());
+        self::assertSame('\\d{3}', $metadata->getPager()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getTollFree());
+        self::assertSame('\\d{4}', $metadata->getTollFree()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPremiumRate());
+        self::assertSame('\\d{5}', $metadata->getPremiumRate()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getSharedCost());
+        self::assertSame('\\d{6}', $metadata->getSharedCost()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPersonalNumber());
+        self::assertSame('\\d{7}', $metadata->getPersonalNumber()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getVoip());
+        self::assertSame('\\d{8}', $metadata->getVoip()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getUan());
+        self::assertSame('\\d{9}', $metadata->getUan()->getNationalNumberPattern());
     }
 
     public function testSetRelevantDescPatternsSetsAllDescriptionsForShortNumbers(): void
@@ -584,12 +593,18 @@ class BuildMetadataFromXmlTest extends TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadataBuilder();
         BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, true /* isShortNumberMetadata */);
-        self::assertSame('\\d{1}', $metadata->getTollFree()?->getNationalNumberPattern());
-        self::assertSame('\\d{2}', $metadata->getStandardRate()?->getNationalNumberPattern());
-        self::assertSame('\\d{3}', $metadata->getPremiumRate()?->getNationalNumberPattern());
-        self::assertSame('\\d{4}', $metadata->getShortCode()?->getNationalNumberPattern());
-        self::assertSame('\\d{5}', $metadata->getCarrierSpecific()?->getNationalNumberPattern());
-        self::assertSame('\\d{6}', $metadata->getSmsServices()?->getNationalNumberPattern());
+        self::assertNotNull($metadata->getTollFree());
+        self::assertSame('\\d{1}', $metadata->getTollFree()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getStandardRate());
+        self::assertSame('\\d{2}', $metadata->getStandardRate()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getPremiumRate());
+        self::assertSame('\\d{3}', $metadata->getPremiumRate()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getShortCode());
+        self::assertSame('\\d{4}', $metadata->getShortCode()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getCarrierSpecific());
+        self::assertSame('\\d{5}', $metadata->getCarrierSpecific()->getNationalNumberPattern());
+        self::assertNotNull($metadata->getSmsServices());
+        self::assertSame('\\d{6}', $metadata->getSmsServices()->getNationalNumberPattern());
     }
 
     public function testSetRelevantDescPatternsThrowsErrorIfTypePresentMultipleTimes(): void
